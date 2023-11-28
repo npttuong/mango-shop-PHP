@@ -54,7 +54,7 @@ Route::prefix('admin')->group(function () {
 
 // Cart
 Route::get('/add-cart/{id}', [ProductController::class, 'addCart']);
-
+Route::get('/cart', [ProductController::class, 'showCart']);
 
 
 // Register user

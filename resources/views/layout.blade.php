@@ -14,17 +14,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
   <!-- Bootstrap5 CSS-->
   <link rel="stylesheet" href="/css/bootstrap-lib/bootstrap.min.css">
-  <!-- JQuery -->
-  <script defer src="/js/js-lib/jquery-3.6.4.min.js"></script>
-  <!-- Boostrap js -->
-  <script defer src="/js/js-lib/bootstrap.bundle.min.js"></script>
-  @yield('js')
-  <!-- Main script -->
-  <script defer src="/js/main.js"></script>
   <!-- Fontawesome -->
   <link rel="stylesheet" href="/font/fontawesome-free-6.4.0-web/css/all.min.css">
   <!-- Animate lib-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- toastr-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <!-- File css -->
   <link rel="stylesheet" href="/css/style.css">
   @yield('page-title')
@@ -246,7 +241,7 @@
               </div>
               <div class="navbar__icon">
                 <i class="fa-solid fa-cart-shopping"></i>
-                <span class="navbar__icon-quantity">0</span>
+                <span class="navbar__icon-quantity">{{ count((array) session('cart')) }}</span>
               </div>
             </div>
           </div>
@@ -442,6 +437,20 @@
       </div>
     </footer>
   </div>
+
+  <!-- JQuery -->
+  <script src="/js/js-lib/jquery-3.6.4.min.js"></script>
+  <!-- Boostrap js -->
+  <script src="/js/js-lib/bootstrap.bundle.min.js"></script>
+  <!-- Toast notification -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  @yield('js')
+  <!-- Main script -->
+  <script src="/js/main.js"></script>
+  @include('components.toastr')
 </body>
 
 </html>

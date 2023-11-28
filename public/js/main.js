@@ -2,46 +2,50 @@
 $(document).ready(function () {
     var btn = $("#back-top-btn");
 
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+
     $(window).on('scroll', function () {
         if ($(window).scrollTop() > 300) {
             btn.fadeIn(1000);
         } else {
             btn.fadeOut(1000);
         }
-    })
-});
-// Multi languages
-const langBtns = document.querySelectorAll('.languages-list-link');
-const multiLangEls = document.querySelectorAll('.multilang');
-function getLang() {
-    if (localStorage['lang'])
-        return localStorage['lang'];
-    localStorage.setItem('lang', 'vi-VN');
-    return localStorage['lang'];
-}
+    });
 
-function setLang(lang) {
-    localStorage.setItem('lang', lang);
-    location.reload();
-}
+    $('.product-card').each(function (i, element) {
+        $(element).on("click", function (event) {
+            event.stopPropagation();
+            const productID = $(this).data("productId");
+            window.location.href = '/detail/' + productID;
+        });
+    });
 
-langBtns.forEach(function (langBtn) {
-    langBtn.addEventListener('click', function () {
-        setLang(langBtn.dataset.lang);
-    })
+    $('.product-card__text-current-price, .detail__info-price, .detail__info-unit-price').each(function (i, element) {
+        const price = parseInt($(element).text());
+        $(element).text(new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+            maximumSignificantDigits: 3,
+        }).format(price));
+    });
 });
 
-const lang = getLang();
-if (lang === 'en-US') {
-    document.querySelector('#language-current > img').src = './asssets/img/united-kingdom.png';
-    document.querySelector('.header-search__box-input').placeholder = 'Search for products...';
-}
-multiLangEls.forEach(function (multilangEl) {
-    multilangEl.innerHTML = labels[multilangEl.id][lang];
-    if (multilangEl.src) {
-        multilangEl.setAttribute('data-bs-original-title', labels[multilangEl.id][lang]);
-    }
-});
 
 function checkKey(e) {
     enterKey = 13;

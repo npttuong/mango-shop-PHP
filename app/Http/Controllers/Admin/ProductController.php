@@ -286,7 +286,9 @@ class ProductController extends Controller
 		$product = Product::find($id);
 		if (empty($product))
 			abort(404, "Không tìm thấy sản phẩm!");
-		$quantity = $request->query->quantity ?? 1;
+		$quantity = (int) $request->quantity ?? 1;
+		$size = $request->size ?? $product->sizes[0]->size;
+		$color = $request->color ?? $product->colors[0]->color_code;
 		$cart = session()->get('cart', []);
 		if (isset($cart[$id])) {
 			$cart[$id]['quantity'] += $quantity;
@@ -294,13 +296,19 @@ class ProductController extends Controller
 			$cart[$id] = [
 				"name" => $product->product_name,
 				"quantity" => $quantity,
+				"size" => $size,
+				"color" => $color,
 				"price" => $product->unit_price,
 				"image" => $product->illustrations[0]->illustration_path,
 			];
 		}
 
 		session()->put('cart', $cart);
+		return redirect()->back()->with('success', "Thêm vào giỏ hàng thành công");
+	}
 
-		return redirect()->back()->with('success', 'Thêm sản phẩm vào giỏ hàng thành công!');
+	public function showCart()
+	{
+		return view('cart');
 	}
 }

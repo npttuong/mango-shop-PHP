@@ -98,10 +98,10 @@
           </div>
           @if ($products->count() > 0)
             @foreach ($products as $product)
-              <div class="col-6 col-md-4 col-lg-3 mt-4 product-card-wrapper">
-                <a id="{{ $product->id }}" href="/detail/{{ $product->id }}" class="product-card"n>
+              <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div id="{{ $product->id }}" class="product-card" data-product-id="{{ $product->id }}">
                   <div class="product-card__img">
-                    <img src="/img/{{ $product->illustrations[0]->illustration_path }}">
+                    <img src="/img/{{ $product->illustrations[0]->illustration_path }}" alt="">
                   </div>
 
                   <div class="product-card__text">
@@ -109,17 +109,10 @@
                       {{ $product->product_name }}
                     </h4>
                     <div class="product-card__text-price">
-                      @if ($product->discount > 0)
-                        <span class="product-card__text-current-price">
-                          {{ $product->unit_price - $product->unit_price * $product->discount }} Đ
-                        </span>
-                        <span class="product-card__text-old-price">{{ $product->unit_price }}Đ</span>
-                      @else
-                        <span class="product-card__text-current-price">
-                          {{ $product->unit_price }}Đ
-                        </span>
-                      @endif
-
+                      <span class="product-card__text-current-price">
+                        {{ $product->unit_price - $product->unit_price * $product->discount }}
+                      </span>
+                      {{-- <span class="product-card__text-old-price">{{ $product->unit_price }}Đ</span> --}}
                     </div>
                     <div class="product-card__text-star">
                       <ul>
@@ -134,11 +127,11 @@
                   </div>
 
                   <div class="d-flex justify-content-center">
-                    <button type="button" class="product-card__btn" onclick="addCart('{{ $product->id }}')">
-                      <span id="ADD_CART" class="multilang">Thêm vào giỏ hàng</span>
-                    </button>
+                    <a type="button" href="/add-cart/{{ $product->id }}" class="product-card__btn">
+                      Thêm vào giỏ hàng
+                    </a>
                   </div>
-                </a>
+                </div>
               </div>
             @endforeach
           @else

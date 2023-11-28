@@ -774,6 +774,7 @@ hr {
 
 .product-card:hover {
 	box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+	cursor: pointer;
 }
 
 .product-card__img img {
@@ -791,8 +792,8 @@ hr {
 }
 
 .product-card__text-name {
-	height: 35px;
-	line-height: 16px;
+	height: 41px;
+	line-height: 20px;
 	font-size: 16px;
 	font-weight: 600;
 	display: -webkit-box;
