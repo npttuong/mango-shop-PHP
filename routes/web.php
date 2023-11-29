@@ -55,6 +55,8 @@ Route::prefix('admin')->group(function () {
 // Cart
 Route::get('/add-cart/{id}', [ProductController::class, 'addCart']);
 Route::get('/cart', [ProductController::class, 'showCart']);
+Route::get('/remove-cart/{id}', [ProductController::class, 'removeCart']);
+Route::get('/update-cart', [ProductController::class, 'updateCart']);
 
 
 // Register user
@@ -74,7 +76,4 @@ Route::get('/test', [ShopController::class, 'testSesstionFunc']);
 
 // Route::get('/test', function () {
 //     return view('test');
-// });
-// Route::(function () {
-//   return abort(404);
 // });

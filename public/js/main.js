@@ -36,7 +36,7 @@ $(document).ready(function () {
         });
     });
 
-    $('.product-card__text-current-price, .detail__info-price, .detail__info-unit-price').each(function (i, element) {
+    $('.product-card__text-current-price, .detail__info-price, .detail__info-unit-price, .price').each(function (i, element) {
         const price = parseInt($(element).text());
         $(element).text(new Intl.NumberFormat('vi-VN', {
             style: 'currency',

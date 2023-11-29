@@ -1127,9 +1127,9 @@ hr {
 
 
 /* Start Shoping Cart */
-.table {
+/* .table {
 	font-size: 1.6rem;
-}
+} */
 
 .table-thead {
 	font-weight: 500;
@@ -1138,7 +1138,8 @@ hr {
 }
 
 .small-img {
-	width: 100px;
+	width: 75px;
+	height: 75px;
 }
 
 .remove-icon {
@@ -1154,6 +1155,24 @@ hr {
 	background-color: var(--secondary-color);
 	color: var(--primary-color);
 
+}
+
+.center-object--wrap {
+	position: relative;
+}
+
+.center-object {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.text-overflow {
+	max-width: 300px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 /* End Shoping Cart */
@@ -1243,7 +1262,7 @@ hr {
 
 .incremment-wrapper span {
 	text-align: center;
-	font-weight: 700;
+	font-weight: 600;
 	cursor: pointer;
 	user-select: none;
 }
@@ -1257,11 +1276,26 @@ hr {
 }
 
 .incremment-wrapper span.incremment-num {
-	font-size: 18px;
+	font-size: 16px;
 	line-height: 40px;
 	width: 40%;
 	pointer-events: none;
 }
+
+/* Small incremment */
+.incremment--small.incremment-wrapper {
+	width: 100px;
+	height: 30px;
+}
+
+.incremment--small.incremment-wrapper .incremment-minus,
+.incremment--small.incremment-wrapper .incremment-num,
+.incremment--small.incremment-wrapper .incremment-plus {
+	line-height: 30px;
+	font-size: 18px;
+}
+
+
 
 .detail__add-cart-btn {
 	border: none;

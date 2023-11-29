@@ -186,7 +186,7 @@
   <div class="row">
     @foreach ($categories as $category)
       <div class="col-sm-6 col-md-4 col-lg-3 mt-4 mt-lg-4">
-        <a href="/shop" class="category-card">
+        <a href="/shop?type={{ $category->id }}" class="category-card">
           <div class="category-card__img">
             <img src="/img/category-{{ $category->id }}.jpg" alt="">
           </div>

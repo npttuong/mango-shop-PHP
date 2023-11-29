@@ -106,7 +106,7 @@
             <span class="incremment-minus">-</span>
             <span class="incremment-num">1</span>
             <span class="incremment-plus">+</span>
-            <input type="number" name="quantity" value="1" min="1" step="1" hidden>
+            <input type="number" class="quantity" name="quantity" value="1" min="1" step="1" hidden>
           </div>
 
           <button type="submit" class="detail__add-cart-btn">

@@ -286,7 +286,7 @@ class ProductController extends Controller
 		$product = Product::find($id);
 		if (empty($product))
 			abort(404, "Không tìm thấy sản phẩm!");
-		$quantity = (int) $request->quantity ?? 1;
+		$quantity = $request->quantity ?? 1;
 		$size = $request->size ?? $product->sizes[0]->size;
 		$color = $request->color ?? $product->colors[0]->color_code;
 		$cart = session()->get('cart', []);
@@ -295,7 +295,7 @@ class ProductController extends Controller
 		} else {
 			$cart[$id] = [
 				"name" => $product->product_name,
-				"quantity" => $quantity,
+				"quantity" => (int) $quantity,
 				"size" => $size,
 				"color" => $color,
 				"price" => $product->unit_price,
@@ -310,5 +310,27 @@ class ProductController extends Controller
 	public function showCart()
 	{
 		return view('cart');
+	}
+	public function removeCart($id)
+	{
+		if ($id) {
+			$cart = session()->get('cart');
+			if (isset($cart[$id])) {
+				unset($cart[$id]);
+				session()->put('cart', $cart);
+			}
+			return redirect()->back()->with('success', 'Xóa sản phẩm trong giỏ hàng thành công.');
+		} else {
+			abort(404, "Mã sản phẩm không tồn tại trong giỏ hàng!");
+		}
+	}
+	public function updateCart(Request $request)
+	{
+		if ($request->id && $request->quantity) {
+			$cart = session()->get('cart');
+			$cart[$request->id]["quantity"] = $request->quantity;
+			session()->put('cart', $cart);
+			session()->flash('success', 'Cập nhật giỏ hàng thành công.');
+		}
 	}
 }

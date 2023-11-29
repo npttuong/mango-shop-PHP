@@ -1,24 +1,27 @@
 $(document).ready(function () {
-  const plus = document.querySelector(".incremment-plus"),
-    minus = document.querySelector(".incremment-minus"),
-    num = document.querySelector(".incremment-num"),
-    numberInput = document.querySelector('input[name="quantity"]');
-  let a = 1;
-
-  plus.addEventListener("click", () => {
-    a++;
-    numberInput.value = a;
-    num.innerText = a;
+  quantity = [];
+  $('input[class="quantity"]').each(function (i) {
+    quantity[i] = $(this).val() ?? 1;
   });
 
-  minus.addEventListener("click", () => {
-    a--;
-    if (a < 1) {
-      a = 1;
-      return;
-    }
-    numberInput.value = a;
-    num.innerText = a;
+  $('.incremment-plus').each(function (i, element) {
+    $(element).on('click', function () {
+      quantity[i]++;
+      $('input[class="quantity"]')[i].setAttribute('value', quantity[i]);
+      $('.incremment-num')[i].textContent = quantity[i];
+    });
+  });
+
+  $('.incremment-minus').each(function (i, element) {
+    $(element).on('click', function () {
+      quantity[i]--;
+      if (quantity[i] < 1) {
+        quantity[i] = 1;
+        return;
+      }
+      $('input[class="quantity"]')[i].value = quantity[i];
+      $('.incremment-num')[i].textContent = quantity[i];
+    });
   });
 });
 
