@@ -24,6 +24,11 @@ html {
 	color: var(--secondary-color);
 }
 
+.bg--primary.text-second-color:hover {
+	color: var(--primary-color);
+	background-color: var(--secondary-color);
+}
+
 .btn-lg {
 	min-width: 100px;
 	padding: 12px 8px;

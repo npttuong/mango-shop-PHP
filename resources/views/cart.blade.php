@@ -7,13 +7,14 @@
     $(document).ready(function() {
       $('.incremment-minus, .incremment-plus').each(function(i, element) {
         $(element).on('click', function(e) {
-          const product_id = $(this).data('productId');
-          const quantity = $(`input[name=quantity_${$(this).data('productId')}]`).val();
+          const cartName = $(this).data('cart');
+          const quantity = parseInt($(`input[name=quantity_${cartName}]`).val());
+          console.log(cartName, quantity);
           $.ajax({
             url: '/update-cart',
             method: "GET",
             data: {
-              id: product_id,
+              cartName: cartName,
               quantity: quantity
             },
             success: function(response) {
@@ -64,28 +65,32 @@
         </thead>
 
         <tbody>
-          @foreach (session('cart') as $product_id => $detail)
+          @foreach (session('cart') as $cartName => $detail)
+            @php
+              $product_id = explode('_', $cartName)[0];
+              $colorName = $colors->find($detail['color'])->color;
+            @endphp
             <tr>
               <td class="text-overflow">
                 <img src="/img/{{ $detail['image'] }}" class="small-img me-2">
                 <span>{{ $detail['name'] }}</span>
               </td>
               <td class="price">{{ $detail['price'] }}</td>
-              <td>S</td>
-              <td>Đen</td>
+              <td data-cart="{{ $cartName }}">{{ $detail['size'] }}</td>
+              <td data-cart="{{ $cartName }}" data-color="{{ $detail['color'] }}">{{ $colorName }}</td>
               <td>
                 <div class="incremment-wrapper incremment--small">
-                  <span class="incremment-minus" data-product-id="{{ $product_id }}">-</span>
+                  <span class="incremment-minus" data-cart="{{ $cartName }}">-</span>
                   <span class="incremment-num">{{ $detail['quantity'] }}</span>
-                  <span class="incremment-plus" data-product-id="{{ $product_id }}">+</span>
-                  <input type="number" class="quantity" name="quantity_{{ $product_id }}"
-                    data-product-id="{{ $product_id }}" value="{{ $detail['quantity'] }}" min="1" step="1"
-                    hidden>
+                  <span class="incremment-plus" data-cart="{{ $cartName }}">+</span>
+                  <input type="number" class="quantity" name="quantity_{{ $cartName }}"
+                    value="{{ $detail['quantity'] }}" min="1" step="1" hidden>
+                  {{-- data-product-id="{{ $product_id }}" --}}
                 </div>
               </td>
               <td class="price">{{ $detail['price'] * $detail['quantity'] }}</td>
               <td>
-                <a href="/remove-cart/{{ $product_id }}" class="btn btn-danger">
+                <a href="/remove-cart/{{ $cartName }}" class="btn btn-danger">
                   <i class="fa-solid fa-xmark"></i>
                 </a>
               </td>
@@ -94,7 +99,10 @@
         </tbody>
       </table>
     @else
-      <h2 class="text-center">Chưa thêm sản phẩm vào giỏ hàng</h2>
+      <div class="text-center">
+        <h2 class="text-center">Chưa thêm sản phẩm vào giỏ hàng.</h2>
+        <a href="/shop" class="link-info fs-3">Đi tới trang mua sắm</a>
+      </div>
     @endif
   </div>
 @endsection

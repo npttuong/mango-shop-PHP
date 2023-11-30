@@ -12,7 +12,8 @@ class ShopController extends Controller
 	public function index(Request $request)
 	{
 		$categoryFilter = $request->type;
-		$perPage = $request->perPage > 0 ? $request->perPage : 5;
+		$defaultPerPage = 8;
+		$perPage = $request->perPage ?? $defaultPerPage;
 		$searchString = $request->words;
 		$sizes = Size::all();
 		$colors = Color::all();
@@ -85,7 +86,7 @@ class ShopController extends Controller
 			$products->where('product_name', 'like', '%' . $searchString . '%');
 		}
 
-		$products = $products->paginate(2)->withQueryString();
+		$products = $products->paginate($perPage)->withQueryString();
 
 		return view('shop', compact('products', 'quantityColors', 'quantitySizes', 'reqColor', 'reqSize'));
 	}

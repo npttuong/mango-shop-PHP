@@ -30,7 +30,7 @@
     <input type="text" name="words" value="{{ request('words') }}" hidden>
     <div class="row">
       <div class="col-sm-12 col-lg-3">
-        <button type="submit" class="btn btn-warning btn-lg">Lọc</button>
+        <button type="submit" class="btn btn-lg bg--primary text-second-color">Lọc sản phẩm</button>
         <div class="row">
           <div class="col-12 d-flex align-items-center">
             <h3 class="filter-heading">
@@ -88,10 +88,10 @@
             <div>
               <div class="custom-select" style="width:140px;">
                 <select name="perPage">
-                  <option value="0">Hiển thị sản phẩm</option>
-                  <option value="10">10</option>
-                  <option value="20">20</option>
-                  <option value="30">30</option>
+                  <option value="8">Hiển thị sản phẩm</option>
+                  <option value="8">8</option>
+                  <option value="16">16</option>
+                  <option value="24">24</option>
                 </select>
               </div>
             </div>
