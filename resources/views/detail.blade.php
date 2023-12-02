@@ -150,10 +150,6 @@
             <button class="nav-link text-color" id="infomation-tab" data-bs-toggle="tab" data-bs-target="#infomation"
               type="button" role="tab" aria-controls="infomation" aria-selected="false">Thông tin</button>
           </li>
-          <li class="nav-item detail__tabs-item" role="presentation">
-            <button class="nav-link text-color" id="review-tab" data-bs-toggle="tab" data-bs-target="#review"
-              type="button" role="tab" aria-controls="review" aria-selected="false">Đánh giá</button>
-          </li>
         </ul>
         <div class="tab-content detail_tab-content mt-2" id="myTabContent">
           <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
@@ -162,65 +158,58 @@
           <div class="tab-pane fade" id="infomation" role="tabpanel" aria-labelledby="infomation-tab">
             {{ $product->product_info }}
           </div>
-          <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">Lorem ipsum
-            dolor sit amet consectetur, adipisicing elit. Dolore quisquam labore commodi quod itaque
-            distinctio
-            laudantium rerum vitae tempore inventore debitis, consequatur tenetur veritatis eum vero neque
-            optio
-            consequuntur repellat.</div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="spacing-section-32"></div>
+    <div class="spacing-section-32"></div>
 
-  <div class="row">
-    <div class="col d-flex align-items-center">
-      <h2 class="section-heading">
-        Có thể bạn cũng thích
-      </h2>
-      <div class="line-through"></div>
+    <div class="row">
+      <div class="col d-flex align-items-center">
+        <h2 class="section-heading">
+          Có thể bạn cũng thích
+        </h2>
+        <div class="line-through"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="row mb-5">
-    @foreach ($relatedProducts as $product)
-      <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-        <div id="{{ $product->id }}" class="product-card" data-product-id="{{ $product->id }}">
-          <div class="product-card__img">
-            <img src="/img/{{ $product->illustrations[0]->illustration_path }}" alt="">
-          </div>
-
-          <div class="product-card__text">
-            <h4 class="product-card__text-name">
-              {{ $product->product_name }}
-            </h4>
-            <div class="product-card__text-price">
-              <span class="product-card__text-current-price">
-                {{ $product->unit_price - $product->unit_price * $product->discount }}
-              </span>
-              {{-- <span class="product-card__text-old-price">{{ $product->unit_price }}Đ</span> --}}
+    <div class="row mb-5">
+      @foreach ($relatedProducts as $product)
+        <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+          <div id="{{ $product->id }}" class="product-card" data-product-id="{{ $product->id }}">
+            <div class="product-card__img">
+              <img src="/img/{{ $product->illustrations[0]->illustration_path }}" alt="">
             </div>
-            <div class="product-card__text-star">
-              <ul>
-                <li><i class="fa-solid fa-star"></i></li>
-                <li><i class="fa-solid fa-star"></i></li>
-                <li><i class="fa-solid fa-star"></i></li>
-                <li><i class="fa-solid fa-star"></i></li>
-                <li><i class="fa-solid fa-star"></i></li>
-                <li class="product-card__text-star-quantity">(99)</li>
-              </ul>
-            </div>
-          </div>
 
-          <div class="d-flex justify-content-center">
-            <a type="button" href="/add-cart/{{ $product->id }}" class="product-card__btn">
-              Thêm vào giỏ hàng
-            </a>
+            <div class="product-card__text">
+              <h4 class="product-card__text-name">
+                {{ $product->product_name }}
+              </h4>
+              <div class="product-card__text-price">
+                <span class="product-card__text-current-price">
+                  {{ $product->unit_price - $product->unit_price * $product->discount }}
+                </span>
+                {{-- <span class="product-card__text-old-price">{{ $product->unit_price }}Đ</span> --}}
+              </div>
+              <div class="product-card__text-star">
+                <ul>
+                  <li><i class="fa-solid fa-star"></i></li>
+                  <li><i class="fa-solid fa-star"></i></li>
+                  <li><i class="fa-solid fa-star"></i></li>
+                  <li><i class="fa-solid fa-star"></i></li>
+                  <li><i class="fa-solid fa-star"></i></li>
+                  <li class="product-card__text-star-quantity">(99)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <a type="button" href="/add-cart/{{ $product->id }}" class="product-card__btn">
+                Thêm vào giỏ hàng
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    @endforeach
-  </div>
-@endsection
+      @endforeach
+    </div>
+  @endsection

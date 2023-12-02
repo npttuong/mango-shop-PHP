@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/detail/{id}', [DetailController::class, 'show']);
 
 Route::prefix('admin')->group(function () {
+  Route::get('/', [ProductController::class, 'index']);
   // Product
   Route::get('/products', [ProductController::class, 'index']);
   Route::get('/create-product', [ProductController::class, 'showCreateProduct']);

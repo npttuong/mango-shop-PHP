@@ -39,7 +39,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         if (empty($category))
             abort(404, 'Tên loại sản phẩm không tồn tại.');
-        return view('admin.update-category');
+        return view('admin.update-category', compact('category'));
     }
     public function updateCategory(Request $request, $id)
     {

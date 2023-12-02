@@ -240,6 +240,8 @@ class ProductController extends Controller
 		return redirect('/admin/update-product/' . $id)->with('updateSuccess', 'Cập nhật sản phẩm thành công');
 	}
 
+
+
 	public function deleteIllutration($illustration_path)
 	{
 		Illustration::destroy($illustration_path);
