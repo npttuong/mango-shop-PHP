@@ -2,22 +2,21 @@
 
 @section('content')
   <h2 class="mb-5 page-heading">Cập nhật loại sản phẩm mới</h2>
-  @if (session()->has('updateSuccess'))
+  @if (session()->has('createSuccess'))
     <div class="alert alert-success" role="alert">
-      {{ session()->get('updateSuccess') }}
+      {{ session()->get('createSuccess') }}
     </div>
   @endif
 
-  @if (session()->has('updateFailed'))
+  @if (session()->has('createFailed'))
     <div class="alert alert-danger" role="alert">
-      {{ session()->get('updateFailed') }}
+      {{ session()->get('createFailed') }}
     </div>
   @endif
 
 
-  <form class="row g-3 fs-4" action="/admin/update-category/{{ $category->id }}" method="post"
-    enctype="application/x-www-form-urlencoded" novalidate>
-    @method('PUT')
+  <form class="row g-3 fs-4" action="/admin/create-category" method="post" enctype="application/x-www-form-urlencoded"
+    novalidate>
     @csrf
     <div class="col-12">
       <label for="inputCategoryName4" class="form-label">Tên loại sản phẩm:</label>
@@ -30,7 +29,7 @@
       @endif
     </div>
     <div class="col-12 d-flex justify-content-center">
-      <button type="submit" class="btn btn-primary btn-lg">Cập nhật loại sản phẩm</button>
+      <button type="submit" class="btn btn-primary btn-lg">Tạo loại sản phẩm</button>
     </div>
   </form>
 @endsection

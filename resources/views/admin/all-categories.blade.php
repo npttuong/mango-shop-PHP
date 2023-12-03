@@ -7,7 +7,7 @@
       {{ session()->get('deleteSuccess') }}
     </div>
   @endif
-  <div class="table-responsive fs-4">
+  <div class="table-responsive">
     <table class="table table-striped table-hover table-lg">
       <thead>
         <th>ID</th>
