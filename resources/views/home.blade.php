@@ -321,4 +321,18 @@
   </div>
 
   <div class="spacing-section-100"></div>
+  <!-- Code của Nguyễn Châu Phúc Huy -->
+  <!-- Javascript -->
+  <script>
+    // Reload lại trang khi nhấn nút back button của browser
+    window.addEventListener("pageshow", function(event) {
+      var historyTraversal = event.persisted ||
+        (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+      if (historyTraversal) {
+        // Handle page restore.
+        window.location.reload();
+      }
+    });
+  </script>
+  <!-- Kết thúc -->
 @endsection

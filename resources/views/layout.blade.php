@@ -25,7 +25,7 @@
   @yield('page-title')
 </head>
 
-<body>
+<body onunload="">
   <div class="app bg--gray">
     <header class="header">
       <!-- Start TopNav -->
@@ -77,36 +77,33 @@
               </div>
             </li>
             <li class="topnav__item-tool">
-              <div class="topnav__item-tool-sign-up">
-                <a class="topnav__item-info-link" href="/register">
-                  <span id="SIGN_UP" class="multilang">Đăng ký</span>
-                </a>
-              </div>
-
-              <div class="topnav__item-tool-sign-in">
-                <a class="topnav__item-info-link" href="/login">
-                  <span id="SIGN_IN" class="multilang">Đăng nhập</span>
-                </a>
-              </div>
-            </li>
-
-            <!-- HTML khi da dang nhap cho phan topnav -->
-            <!-- <li class="ms-4">
+              @if (Auth::check())
                 <div class="topnav__user">
-                  <img class="topnav__user-avatar" src="/img/vendor-5.jpg" alt="Avatar">
-                  <span class="topnav__user-name">Thanh Tuong</span>
+                  <img class="topnav__user-avatar" src="/img/{{ Auth::user()->avatar }}" alt="Avatar">
+                  <span class="topnav__user-name">{{ Auth::user()->username }}</span>
 
                   <ul class="topnav__user-tools">
                     <li class="topnav__user-tools-items">
-                      <a href="/profile" class="topnav__user-tools-link">Hồ sơ của tôi</a>
+                      <a href="/user-profile" class="topnav__user-tools-link">Hồ sơ của tôi</a>
                     </li>
                     <li class="topnav__user-tools-items">
                       <a href="/logout" class="topnav__user-tools-link">Đăng xuất</a>
                     </li>
                   </ul>
                 </div>
-              </li> -->
-
+              @else
+                <div class="topnav__item-tool-sign-up">
+                  <a class="topnav__item-info-link" href="/register">
+                    <span id="SIGN_UP" class="multilang">Đăng ký</span>
+                  </a>
+                </div>
+                <div class="topnav__item-tool-sign-in">
+                  <a class="topnav__item-info-link" href="/login">
+                    <span id="SIGN_IN" class="multilang">Đăng nhập</span>
+                  </a>
+                </div>
+              @endif
+            </li>
           </ul>
         </nav>
       </div>
@@ -451,6 +448,20 @@
   <!-- Main script -->
   <script src="/js/main.js"></script>
   @include('components.toastr')
+  <!-- Code của Nguyễn Châu Phúc Huy -->
+  <!-- Javascript -->
+  <script>
+    // Reload lại trang khi nhấn nút back button của browser
+    window.addEventListener("pageshow", function(event) {
+      var historyTraversal = event.persisted ||
+        (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+      if (historyTraversal) {
+        // Handle page restore.
+        window.location.reload();
+      }
+    });
+  </script>
+  <!-- Kết thúc -->
 </body>
 
 </html>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -107,17 +108,22 @@ class UserController extends Controller
 
         return redirect('/admin/create-user')->with('createSuccess', 'Tạo người dùng thành công.');
     }
+    public function showAdminUpdateUser($username)
+    {
+        $user = User::find($username);
+        if (empty($user))
+            abort(404, 'Người dùng không tồn tại.');
+
+        $roles = User::all()->pluck('role_name')->unique()->values()->all();
+        return view('admin.update-user', compact('user', 'roles'));
+    }
     public function showUpdateUser($username)
     {
         $user = User::find($username);
         if (empty($user))
             abort(404, 'Người dùng không tồn tại.');
 
-        if ($user->role_name === "admin") {
-            $roles = User::all()->pluck('role_name')->unique()->values()->all();
-            return view('admin.update-user', compact('user', 'roles'));
-        } else
-            return view('update-profile', compact('user'));
+        return view('update-profile', compact('user'));
     }
     public function updateUser(Request $request, $username)
     {
@@ -190,8 +196,11 @@ class UserController extends Controller
             'role_name' => $request->input('role_name') ?? 'user',
             'avatar' => $imageName,
         ]);
-
-        return redirect('/admin/update-user/' . $request->input('username'))->with('updateSuccess', 'Cập nhật thông tin người dùng thành công');
+        // dd(Auth::user());
+        if ($user->role_name == "admin")
+            return redirect('/admin/update-user/' . $request->input('username'))->with('updateSuccess', 'Cập nhật thông tin người dùng thành công');
+        return redirect()->back()->with('updateSuccess', 'Cập nhật thông tin người dùng thành công');
+        // "/update-user/" . $request->input('username')
     }
     public function deleteUser($username)
     {

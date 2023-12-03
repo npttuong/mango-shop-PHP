@@ -27,17 +27,18 @@
   <title>Adminitrator Page</title>
 </head>
 
-<body>
+<body onunload="">
   <header class="bg--primary fs-4 py-3">
     <div class="container">
       <nav class="navbar navbar-expand-lg">
         <div class="topnav__user text--white d-lg-none">
-          <img class="topnav__user-avatar" src="/img/no-avatar.jpg" alt="Avatar">
-          <span class="topnav__user-name">Tên tạm</span>
+          <!-- Code của Nguyễn Châu Phúc Huy -->
+          <img class="topnav__user-avatar me-2" src="/img/{{ Auth::user()->avatar }}" alt="Avatar">
+          <span class="topnav__user-name">{{ Auth::user()->username }}</span>
 
           <ul class="topnav__user-tools">
             <li class="topnav__user-tools-items">
-              <a href="/admin/profile/admin" class="topnav__user-tools-link">Hồ sơ của tôi</a>
+              <a href="/admin/admin-profile" class="topnav__user-tools-link">Hồ sơ của tôi</a>
             </li>
             <li class="topnav__user-tools-items">
               <a href="/logout" class="topnav__user-tools-link">Đăng xuất</a>
@@ -122,17 +123,19 @@
         </div>
 
         <div class="topnav__user text--white d-lg-block d-none">
-          <img class="topnav__user-avatar me-2" src="/img/no-avatar.jpg" alt="Avatar">
-          <span class="topnav__user-name">Tên tạm</span>
+          <!-- Code của Nguyễn Châu Phúc Huy -->
+          <img class="topnav__user-avatar me-2" src="/img/{{ Auth::user()->avatar }}" alt="Avatar">
+          <span class="topnav__user-name">{{ Auth::user()->username }}</span>
 
           <ul class="topnav__user-tools">
             <li class="topnav__user-tools-items">
-              <a href="/admin/profile/admin" class="topnav__user-tools-link">Hồ sơ của tôi</a>
+              <a href="/admin/admin-profile" class="topnav__user-tools-link">Hồ sơ của tôi</a>
             </li>
             <li class="topnav__user-tools-items">
               <a href="/logout" class="topnav__user-tools-link">Đăng xuất</a>
             </li>
           </ul>
+
         </div>
       </nav>
     </div>
