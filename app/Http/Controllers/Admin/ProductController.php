@@ -240,8 +240,6 @@ class ProductController extends Controller
 		return redirect('/admin/update-product/' . $id)->with('updateSuccess', 'Cập nhật sản phẩm thành công');
 	}
 
-
-
 	public function deleteIllutration($illustration_path)
 	{
 		Illustration::destroy($illustration_path);
@@ -288,54 +286,21 @@ class ProductController extends Controller
 		$product = Product::find($id);
 		if (empty($product))
 			abort(404, "Không tìm thấy sản phẩm!");
-		$quantity = $request->quantity ?? 1;
-		$size = $request->sizes ?? $product->sizes[0]->size;
-		$color = $request->colors ?? $product->colors[0]->color_code;
+		$quantity = $request->query->quantity ?? 1;
 		$cart = session()->get('cart', []);
-
-		$cartName = $id . '_' . $size . '_' . $color;
-		if (isset($cart[$cartName])) {
-			$cart[$cartName]['quantity'] += $quantity;
+		if (isset($cart[$id])) {
+			$cart[$id]['quantity'] += $quantity;
 		} else {
-			$cart[$cartName] = [
+			$cart[$id] = [
 				"name" => $product->product_name,
-				"quantity" => (int) $quantity,
-				"size" => $size,
-				"color" => $color,
+				"quantity" => $quantity,
 				"price" => $product->unit_price,
 				"image" => $product->illustrations[0]->illustration_path,
 			];
 		}
 
 		session()->put('cart', $cart);
-		return redirect()->back()->with('success', "Thêm vào giỏ hàng thành công");
-	}
 
-	public function showCart()
-	{
-		$colors = Color::all();
-		return view('cart', compact('colors'));
-	}
-	public function removeCart($cartName)
-	{
-		if ($cartName) {
-			$cart = session()->get('cart');
-			if (isset($cart[$cartName])) {
-				unset($cart[$cartName]);
-				session()->put('cart', $cart);
-			}
-			return redirect()->back()->with('success', 'Xóa sản phẩm trong giỏ hàng thành công.');
-		} else {
-			abort(404, "Mã sản phẩm không tồn tại trong giỏ hàng!");
-		}
-	}
-	public function updateCart(Request $request)
-	{
-		if ($request->cartName && $request->quantity) {
-			$cart = session()->get('cart');
-			$cart[$request->cartName]["quantity"] = $request->quantity;
-			session()->put('cart', $cart);
-			session()->flash('success', 'Cập nhật giỏ hàng thành công.');
-		}
+		return redirect()->back()->with('success', 'Thêm sản phẩm vào giỏ hàng thành công!');
 	}
 }

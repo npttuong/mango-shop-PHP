@@ -14,18 +14,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
   <!-- Bootstrap5 CSS-->
   <link rel="stylesheet" href="/css/bootstrap-lib/bootstrap.min.css">
+  <!-- JQuery -->
+  <script defer src="/js/js-lib/jquery-3.6.4.min.js"></script>
+  <!-- Boostrap js -->
+  <script defer src="/js/js-lib/bootstrap.bundle.min.js"></script>
+  @yield('js')
+  <!-- Main script -->
+  <script defer src="/js/main.js"></script>
   <!-- Fontawesome -->
   <link rel="stylesheet" href="/font/fontawesome-free-6.4.0-web/css/all.min.css">
   <!-- Animate lib-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <!-- toastr-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <!-- File css -->
+  <!-- Code của Nguyễn Châu Phúc Huy -->
+  <link rel="stylesheet" href="/css/style.css?v=<?php echo time(); ?>">
+  <!-- Kết thúc -->
   <link rel="stylesheet" href="/css/style.css">
   @yield('page-title')
 </head>
 
-<body>
+<body onunload="">
   <div class="app bg--gray">
     <header class="header">
       <!-- Start TopNav -->
@@ -77,6 +85,18 @@
               </div>
             </li>
             <li class="topnav__item-tool">
+              @if(Auth::check())
+              <div class="topnav__item-tool-user-profile">
+                <a class="topnav__item-info-link" href="/user-profile">
+                  <span id="USER_PROFILE" class="multilang">Tài khoản</span>
+                </a>
+              </div>
+              <div class="topnav__item-tool-log-out">
+                <a class="topnav__item-info-link" href="/logout">
+                  <span id="LOG_OUT" class="multilang">Đăng xuất</span>
+                </a>
+              </div>
+              @else
               <div class="topnav__item-tool-sign-up">
                 <a class="topnav__item-info-link" href="/register">
                   <span id="SIGN_UP" class="multilang">Đăng ký</span>
@@ -88,7 +108,9 @@
                   <span id="SIGN_IN" class="multilang">Đăng nhập</span>
                 </a>
               </div>
+              @endif
             </li>
+
 
             <!-- HTML khi da dang nhap cho phan topnav -->
             <!-- <li class="ms-4">
@@ -126,9 +148,7 @@
 
               <div class="col-12 col-md-12 col-lg-4 header-search__box-wrapper">
                 <form class="header-search__box" action="/shop" method="get" name="frm-search">
-                  <input class="header-search__box-input" type="search"
-                    @if (!empty(request('words'))) value="{{ request('words') }}" @else placeholder="Nhập sản phẩm cần tìm..." @endif
-                    name="words" onkeydown="checkKey();">
+                  <input class="header-search__box-input" type="search" @if (!empty(request('words'))) value="{{ request('words') }}" @else placeholder="Nhập sản phẩm cần tìm..." @endif name="words" onkeydown="checkKey();">
                   <div class="header-search__box-btn" onclick="document.forms['frm-search'].submit()">
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </div>
@@ -164,11 +184,11 @@
 
               <ul class="category-list">
                 @foreach ($categories as $category)
-                  <li class="category-item">
-                    <a href="/shop?type={{ $category->id }}" class="category-item-link">
-                      {{ $category->category_name }}
-                    </a>
-                  </li>
+                <li class="category-item">
+                  <a href="/shop?type={{ $category->id }}" class="category-item-link">
+                    {{ $category->category_name }}
+                  </a>
+                </li>
                 @endforeach
               </ul>
             </div>
@@ -178,9 +198,7 @@
                   <span class="logo-first-part logo-first-part--mobile-tablet">man</span>
                   <span class="logo-second-part logo-second-part--mobile-tablet">go.</span>
                 </a>
-                <button class="navbar-toggler collapsed d-flex d-lg-none ms-auto flex-column justify-content-around"
-                  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler collapsed d-flex d-lg-none ms-auto flex-column justify-content-around" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="toggler-icon top-bar"></span>
                   <span class="toggler-icon middle-bar"></span>
                   <span class="toggler-icon bottom-bar"></span>
@@ -200,8 +218,7 @@
                     </li>
 
                     <li class="nav-item my__nav-item dropdown">
-                      <a class="nav-link my__nav-link .dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false" id="navBarDropdown">
+                      <a class="nav-link my__nav-link .dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navBarDropdown">
                         <div class="navbar__pages">
                           <span id="PAGES" class="multilang">Trang khác</span>
                           <div class="d-flex align-items-center">
@@ -241,7 +258,7 @@
               </div>
               <div class="navbar__icon">
                 <i class="fa-solid fa-cart-shopping"></i>
-                <span class="navbar__icon-quantity">{{ count((array) session('cart')) }}</span>
+                <span class="navbar__icon-quantity">0</span>
               </div>
             </div>
           </div>
@@ -438,19 +455,22 @@
     </footer>
   </div>
 
-  <!-- JQuery -->
-  <script src="/js/js-lib/jquery-3.6.4.min.js"></script>
-  <!-- Boostrap js -->
-  <script src="/js/js-lib/bootstrap.bundle.min.js"></script>
-  <!-- Toast notification -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Code của Nguyễn Châu Phúc Huy -->
+<!-- Javascript -->
+<script>
+  // Reload lại trang khi nhấn nút back button của browser
+  window.addEventListener("pageshow", function(event) {
+    var historyTraversal = event.persisted ||
+      (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+    if (historyTraversal) {
+      // Handle page restore.
+      window.location.reload();
+    }
+  });
+</script>
+<!-- Kết thúc -->
 
-  @yield('js')
-  <!-- Main script -->
-  <script src="/js/main.js"></script>
-  @include('components.toastr')
+
 </body>
 
 </html>

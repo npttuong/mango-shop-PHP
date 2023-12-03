@@ -30,7 +30,7 @@
     <input type="text" name="words" value="{{ request('words') }}" hidden>
     <div class="row">
       <div class="col-sm-12 col-lg-3">
-        <button type="submit" class="btn btn-lg bg--primary text-second-color">Lọc sản phẩm</button>
+        <button type="submit" class="btn btn-warning btn-lg">Lọc</button>
         <div class="row">
           <div class="col-12 d-flex align-items-center">
             <h3 class="filter-heading">
@@ -88,20 +88,20 @@
             <div>
               <div class="custom-select" style="width:140px;">
                 <select name="perPage">
-                  <option value="8">Hiển thị sản phẩm</option>
-                  <option value="8">8</option>
-                  <option value="16">16</option>
-                  <option value="24">24</option>
+                  <option value="0">Hiển thị sản phẩm</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
                 </select>
               </div>
             </div>
           </div>
           @if ($products->count() > 0)
             @foreach ($products as $product)
-              <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-                <div id="{{ $product->id }}" class="product-card" data-product-id="{{ $product->id }}">
+              <div class="col-6 col-md-4 col-lg-3 mt-4 product-card-wrapper">
+                <a id="{{ $product->id }}" href="/detail/{{ $product->id }}" class="product-card"n>
                   <div class="product-card__img">
-                    <img src="/img/{{ $product->illustrations[0]->illustration_path }}" alt="">
+                    <img src="/img/{{ $product->illustrations[0]->illustration_path }}">
                   </div>
 
                   <div class="product-card__text">
@@ -109,10 +109,17 @@
                       {{ $product->product_name }}
                     </h4>
                     <div class="product-card__text-price">
-                      <span class="product-card__text-current-price">
-                        {{ $product->unit_price - $product->unit_price * $product->discount }}
-                      </span>
-                      {{-- <span class="product-card__text-old-price">{{ $product->unit_price }}Đ</span> --}}
+                      @if ($product->discount > 0)
+                        <span class="product-card__text-current-price">
+                          {{ $product->unit_price - $product->unit_price * $product->discount }} Đ
+                        </span>
+                        <span class="product-card__text-old-price">{{ $product->unit_price }}Đ</span>
+                      @else
+                        <span class="product-card__text-current-price">
+                          {{ $product->unit_price }}Đ
+                        </span>
+                      @endif
+
                     </div>
                     <div class="product-card__text-star">
                       <ul>
@@ -127,11 +134,11 @@
                   </div>
 
                   <div class="d-flex justify-content-center">
-                    <a type="button" href="/add-cart/{{ $product->id }}" class="product-card__btn">
-                      Thêm vào giỏ hàng
-                    </a>
+                    <button type="button" class="product-card__btn" onclick="addCart('{{ $product->id }}')">
+                      <span id="ADD_CART" class="multilang">Thêm vào giỏ hàng</span>
+                    </button>
                   </div>
-                </div>
+                </a>
               </div>
             @endforeach
           @else

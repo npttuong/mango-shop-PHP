@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Str;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -177,7 +177,6 @@ class UserController extends Controller
 
                 // Di chuyển file vào thư mục img trên server
                 $file->move(public_path('img'), $imageName);
-
             } else  // File không đúng định dạng hình ảnh thì trở về với thông báo lỗi
                 return redirect()->back()->with('avatarMsg', 'File tải lên không đúng định dạng hình ảnh.');
         }
@@ -214,8 +213,8 @@ class UserController extends Controller
             abort(404, 'Người dùng không tồn tại!');
         else
             if ($user->role_name === "admin")
-                return view('admin.admin-profile', compact('user'));
-            else
-                return view('user-profile', compact('user'));
+            return view('admin.admin-profile', compact('user'));
+        else
+            return view('user-profile', compact('user'));
     }
 }

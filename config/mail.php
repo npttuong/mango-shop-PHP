@@ -91,10 +91,30 @@ return [
     |
     */
 
-    'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+    // Code của Nguyễn Châu Phúc Huy
+    'stream' => [
+
+        'ssl' =>[
+
+        'allow_self_signed'=>true,
+        'verify_peer'=>false,
+        'verify_peer_name'=>false,
+
+        ],
+
     ],
+
+    'from' => [
+        'address' => env('MAIL_FROM_ADDRESS', 'phuchuynguyenchau@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'LARAVEL'),
+    ],
+    // Kết thúc
+
+
+    // 'from' => [
+    //     'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+    //     'name' => env('MAIL_FROM_NAME', 'Example'),
+    // ],
 
     /*
     |--------------------------------------------------------------------------

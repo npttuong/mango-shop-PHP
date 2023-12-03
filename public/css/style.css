@@ -24,11 +24,6 @@ html {
 	color: var(--secondary-color);
 }
 
-.bg--primary.text-second-color:hover {
-	color: var(--primary-color);
-	background-color: var(--secondary-color);
-}
-
 .btn-lg {
 	min-width: 100px;
 	padding: 12px 8px;
@@ -779,7 +774,6 @@ hr {
 
 .product-card:hover {
 	box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-	cursor: pointer;
 }
 
 .product-card__img img {
@@ -797,8 +791,8 @@ hr {
 }
 
 .product-card__text-name {
-	height: 41px;
-	line-height: 20px;
+	height: 35px;
+	line-height: 16px;
 	font-size: 16px;
 	font-weight: 600;
 	display: -webkit-box;
@@ -1132,9 +1126,9 @@ hr {
 
 
 /* Start Shoping Cart */
-/* .table {
+.table {
 	font-size: 1.6rem;
-} */
+}
 
 .table-thead {
 	font-weight: 500;
@@ -1143,8 +1137,7 @@ hr {
 }
 
 .small-img {
-	width: 75px;
-	height: 75px;
+	width: 100px;
 }
 
 .remove-icon {
@@ -1160,24 +1153,6 @@ hr {
 	background-color: var(--secondary-color);
 	color: var(--primary-color);
 
-}
-
-.center-object--wrap {
-	position: relative;
-}
-
-.center-object {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.text-overflow {
-	max-width: 300px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
 }
 
 /* End Shoping Cart */
@@ -1267,7 +1242,7 @@ hr {
 
 .incremment-wrapper span {
 	text-align: center;
-	font-weight: 600;
+	font-weight: 700;
 	cursor: pointer;
 	user-select: none;
 }
@@ -1281,26 +1256,11 @@ hr {
 }
 
 .incremment-wrapper span.incremment-num {
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 40px;
 	width: 40%;
 	pointer-events: none;
 }
-
-/* Small incremment */
-.incremment--small.incremment-wrapper {
-	width: 100px;
-	height: 30px;
-}
-
-.incremment--small.incremment-wrapper .incremment-minus,
-.incremment--small.incremment-wrapper .incremment-num,
-.incremment--small.incremment-wrapper .incremment-plus {
-	line-height: 30px;
-	font-size: 18px;
-}
-
-
 
 .detail__add-cart-btn {
 	border: none;
@@ -1619,7 +1579,6 @@ hr {
 	}
 }
 
-
 /* Breakpoint Tablet */
 @media (min-width: 768px) and (max-width: 991px) {}
 
@@ -1631,3 +1590,211 @@ hr {
 		justify-content: space-between;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+/* Code của Nguyễn Châu Phúc Huy */
+
+/* Log in */
+.login {
+	/* width: 100%; */
+	/* max-width: 1200px; */
+	margin: 0px auto;
+	/* padding: 100px 0px; */
+}
+
+/* Màu nền cho nút login và background
+  Start */
+.gradient-custom-3 {
+	background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+}
+
+.gradient-custom-4 {
+	background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+}
+
+/* End */
+
+.form-login {
+	border-radius: 15px;
+	padding-top: 10px !important;
+	height: 450px !important;
+	width: 550px;
+}
+
+.form-login h2 {
+	font-size: calc(2.325rem + .9vw);
+	font-family: 'Roboto', sans-serif;
+}
+
+.form-textinput {
+	min-height: calc(1.8em + 1rem + calc(var(--bs-border-width) * 2));
+	font-size: 16px;
+}
+
+.form-label {
+	margin-bottom: 0.5rem;
+	font-size: 13px;
+	opacity: 0.7;
+	font-style: italic;
+}
+
+.checkbox_autologin {
+	vertical-align: middle;
+	position: relative;
+	bottom: 1px;
+}
+
+.autologin {
+	display: inline-block;
+}
+
+.autologin label {
+	font-size: 13px;
+}
+
+.forgetpassword{
+    color: blue;
+    font-size: 13px;
+	float: right;
+}
+
+.forgetpassword a{
+	text-decoration: none;
+}
+
+.btn-login {
+	height: 48px;
+	min-width: 165px;
+	font-size: 16px;
+	padding: 12px 8px;
+}
+
+form .btn-login:hover {
+	opacity: 0.9;
+}
+
+.registerhere {
+	font-size: 15px;
+	margin-top: 24px;
+}
+
+.registerhere u {
+	color: blue;
+}
+
+
+
+
+/* Register */
+.register {
+	margin: 0px auto;
+	height: 870px;
+}
+
+.register-background {
+	height: 870px;
+}
+
+/* Màu nền cho nút register và background
+  Start */
+.gradient-custom-3 {
+	background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+}
+
+.gradient-custom-4 {
+	background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+}
+
+/* End */
+
+.register .container h2 {
+	font-size: calc(2.325rem + .9vw);
+}
+
+.form-textinput {
+	min-height: calc(1.8em + 1rem + calc(var(--bs-border-width) * 2));
+	font-size: 16px;
+}
+
+.form-label {
+	margin-bottom: 0.5rem;
+	font-size: 13px;
+	opacity: 0.7;
+	font-style: italic;
+}
+
+.form-check-input {
+	padding: 8px
+}
+
+.form-check-label,
+form .loginhere {
+	font-size: 15px;
+}
+
+.check-box {
+	border: solid 1.2px gray;
+}
+
+.form-check-label u,
+.loginhere u {
+	color: blue;
+}
+
+.btn-register {
+	height: 48px;
+	min-width: 165px;
+	font-size: 16px;
+	padding: 12px 8px;
+}
+
+form .btn-register:hover {
+	opacity: 0.9;
+}
+
+/* Liên hệ */
+.form-contact {
+	margin: 30px 0;
+	font-size: 20px;
+    color: #000;
+}
+.form-contact h2 {
+    font-size: calc(2.325rem + .9vw);
+}
+
+.box-icon {
+    width: 30px;
+    float: left;
+}
+
+.address-icon {
+    margin-left: 3px;
+}
+
+
+
+/* Forget password */
+.reset_password_alert {
+	font-size: 20px;
+}
+
+.reset_password_form {
+	margin: auto;
+    width: 50%;
+}
+
+.reset_password_emailinput{
+	width: 570px;
+}
+
+
+/* Kết thúc */
