@@ -63,7 +63,22 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
+## Cấu hình hệ thống
+Ghi vào cuối file http_vhosts.conf nội dung sau, đường dẫn tới thư mục thay đổi tùy theo máy tính cá nhân:
+```
+  <VirtualHost *:80>
+    DocumentRoot "D:/Workspace/PHP/ProjectPHP/ecommercePHP/public"
+    ServerName mango.local
+    <Directory "D:/Workspace/PHP/ProjectPHP/ecommercePHP/public">
+      Options Indexes FollowSymLinks Includes ExecCGI
+      AllowOverride All
+      Require all granted
+      Allow from all
+      RewriteEngine on
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteCond %{REQUEST_FILENAME} !-l
+          RewriteRule ^(.*)$ index.php?$1 [L,QSA]
+    </Directory>
+  </VirtualHost>
+```
 
-### Fix nếu còn thời gian
-# Phần sắp xếp sản phẩm theo giá còn chưa sắp xếp theo giá khuyến mãi được (tạm thời sắp theo giá gốc)
-# Còn thời gian thì css lại phần pagination

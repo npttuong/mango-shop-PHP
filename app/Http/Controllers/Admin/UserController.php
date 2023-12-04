@@ -8,7 +8,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Str;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
